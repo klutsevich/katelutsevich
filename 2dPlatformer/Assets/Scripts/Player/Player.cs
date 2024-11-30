@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb2D;
     [SerializeField] private LayerMask _mask;
     private Ray _ray;
-    [SerializeField] private float _groundCheckRadius = 5f;
+    [SerializeField] private float _groundCheckRadius = 0.8f;
 
     public static Player Instance;
     private bool _groundCheck;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        CheckGround();
+     CheckGround();
     }
 
     internal void Move(float horizontalInput)
@@ -54,7 +54,8 @@ public class Player : MonoBehaviour
 
     internal void Jump()
     {
-        if (_jumpCount > 0)
+        CheckGround();
+    if (_jumpCount > 0)
         {
             _groundCheck = false;
             _rb2D.linearVelocity = new Vector2(_rb2D.linearVelocity.x, _jumpForce);
@@ -66,18 +67,23 @@ public class Player : MonoBehaviour
     public bool CheckGround()
     {
         var hit = Physics2D.Raycast(transform.position, Vector2.down, _groundCheckRadius, _mask);
-        Debug.DrawRay(transform.position, Vector2.down * _groundCheckRadius, Color.red);
-        if (hit.collider != null)
+      _groundCheck = hit.collider != null;
+        if (_groundCheck)
         {
             _jumpCount = _maxJumpCount;
-            return true;
-        }
+      }
 
-        return false;
+        return _groundCheck;
     }
 
-}
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(transform.position, Vector2.down * _groundCheckRadius, Color.red);
 
+    }
+
+  
+}
 
     
     

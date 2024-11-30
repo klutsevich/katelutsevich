@@ -1406,9 +1406,9 @@ GameObject:
   m_Component:
   - component: {fileID: 631951578}
   - component: {fileID: 631951577}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   _jumpForce: 5
   _mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   _groundCheckRadius: 1
 --- !u!114 &1480644770
 MonoBehaviour:
